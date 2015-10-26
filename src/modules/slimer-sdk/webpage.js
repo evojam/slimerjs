@@ -1515,7 +1515,7 @@ function _create(parentWebpageInfo) {
             try {
                 let finalOptions = webpageUtils.getScreenshotOptions(this, options, fs.extension(file));
                 if (finalOptions.format == 'pdf') {
-                    let printOptions = webpageUtils.getPrintOptions(this, browser.contentWindow, file, finalOptions);
+                    let printOptions = webpageUtils.getPrintOptions(this, browser.contentWindow, file, finalOptions, options);
                     if (printOptions === null) {
                         return false;
                     }

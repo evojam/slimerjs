@@ -467,7 +467,7 @@ var webpageUtils = {
         return canvas;
     },
 
-    getPrintOptions : function(webpage, contentWindow, file, options) {
+    getPrintOptions : function(webpage, contentWindow, file, screenshotOptions, options) {
         let currentViewport = webpage.viewportSize;
         let paperSize = webpage.paperSize;
         if (typeof paperSize == 'undefined' || paperSize === null) {
@@ -533,9 +533,9 @@ var webpageUtils = {
         printSettings.unwriteableMarginRight  = 0;
         printSettings.unwriteableMarginBottom = 0;
         printSettings.unwriteableMarginLeft   = 0;
-        printSettings.resolution              = 300;
+        printSettings.resolution              = options.resolution || 300;
         printSettings.paperSizeUnit           = Ci.nsIPrintSettings.kPaperSizeInches;
-        printSettings.scaling                 = options.ratio;
+        printSettings.scaling                 = screenshotOptions.ratio;
 //        printSettings.shrinkToFit             = false;
 
         if ('width' in paperSize && 'height' in paperSize) {
@@ -689,6 +689,13 @@ var webpageUtils = {
                 dump(xx+":"+printSettings[xx]+"\n");
             }
         }*/
+
+        printSettings.paperSizeType  = printSettings.kPaperSizeDefined;
+        printSettings.paperName = "Custom";
+        printSettings.paperWidth = this.paperFormat[options.paperName][0];
+        printSettings.paperHeight = this.paperFormat[options.paperName][1];
+        printSettings.shrinkToFit = false;
+
         return printSettings;
     },
     
