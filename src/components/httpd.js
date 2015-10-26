@@ -1529,7 +1529,7 @@ RequestReader.prototype =
       dumpn("*** remaining body data len=" + this._contentLength);
       if (this._contentLength == 0)
       {
-        this._validateRequest();
+        //this._validateRequest();
         this._state = READER_FINISHED;
         this._handleResponse();
         return true;
